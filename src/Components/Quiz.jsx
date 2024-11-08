@@ -79,37 +79,46 @@ function Quiz() {
   const currentQuestion = questions[currQuestion];
 
   return (
-    <div className="Quiz">
-      {currentQuestion ? (
-        <>
-          <div className="question-text">{currentQuestion.question}</div>
-          <div className="Options">
-            {shuffledOptions.map((option, index) => (
-              <button
-                key={index}
-                className={`option-button ${selectedOption === option ? 'selected' : ''}`}
-                onClick={() => handleOptionClick(option)}
-              >
-                {option}
-              </button>
-            ))}
-          </div>
-          <div className="quiz-navigation">
-            {currQuestion === questions.length - 1 ? (
-              <button className="next-button" onClick={finishQuiz} disabled={!selectedOption}>
-                Finish Quiz
-              </button>
-            ) : (
-              <button className="next-button" onClick={nextQuestion} disabled={!selectedOption}>
-                Next Question
-              </button>
-            )}
-          </div>
-        </>
-      ) : (
-        <p>Loading questions...</p>
-      )}
-    </div>
+  <div className="Quiz">
+  {currentQuestion ? (
+    <>
+      <div className="question-text" dangerouslySetInnerHTML={{ __html: currentQuestion.question }}></div>
+      <div className="Options">
+        {shuffledOptions.map((option, index) => (
+          <button
+            key={index}
+            className={`option-button ${selectedOption === option ? 'selected' : ''}`}
+            onClick={() => handleOptionClick(option)}
+          >
+            {option}
+          </button>
+        ))}
+      </div>
+      <div className="quiz-navigation">
+        {currQuestion === questions.length - 1 ? (
+          <button
+            className="next-button"
+            onClick={finishQuiz}
+            disabled={!selectedOption}
+          >
+            Finish Quiz
+          </button>
+        ) : (
+          <button
+            className="next-button"
+            onClick={nextQuestion}
+            disabled={!selectedOption}
+          >
+            Next Question
+          </button>
+        )}
+      </div>
+    </>
+  ) : (
+    <p>Loading questions...</p>
+  )}
+</div>
+
   );
 }
 
